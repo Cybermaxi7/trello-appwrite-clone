@@ -5,16 +5,17 @@ import { useBoardStore } from "@/store/BoardStore";
 import { XCircleIcon } from "@heroicons/react/16/solid";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { DraggableProvidedDraggableProps } from "react-beautiful-dnd";
+import { DraggableProvidedDragHandleProps, DraggableProvidedDraggableProps } from "react-beautiful-dnd";
 
 type Props = {
     todo: Todo;
     index: number;
     id: TypedColumn;
     innerRef: (element: HTMLElement | null) => void;
-    draggableProps: DraggableProvidedDraggableProps;
-    dragHandleProps: DraggableProvidedDraggableProps | null | undefined;
+    draggableProps: DraggableProvidedDraggableProps | null | undefined;
+    dragHandleProps: DraggableProvidedDragHandleProps | null | undefined;
 };
+
 
 export default function TodoCard({
     todo,

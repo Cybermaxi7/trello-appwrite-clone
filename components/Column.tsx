@@ -10,6 +10,7 @@ type Props = {
     id: TypedColumn;
     todos: Todo[];
     index: number;
+
 };
 
 const idToColumnText: { [key in TypedColumn]: string } = {
@@ -18,7 +19,7 @@ const idToColumnText: { [key in TypedColumn]: string } = {
     done: "Done",
 };
 
-export default function Column({ id, todos, index }: Props) {
+export default function Column({ id, todos, index,  }: Props) {
     const [searchString, setNewTaskType] = useBoardStore((state) => [
         state.searchString,
         state.setNewTaskType,
@@ -89,11 +90,11 @@ export default function Column({ id, todos, index }: Props) {
                                                         innerRef={
                                                             provided.innerRef
                                                         }
-                                                        draggableProps={
-                                                            provided.draggableProps
-                                                        }
                                                         dragHandleProps={
                                                             provided.dragHandleProps
+                                                        }
+                                                        draggableProps={
+                                                            provided.draggableProps
                                                         }
                                                     />
                                                 )}
