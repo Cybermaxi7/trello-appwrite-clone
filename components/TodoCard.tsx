@@ -11,6 +11,7 @@ type Props = {
     todo: Todo;
     index: number;
     id: TypedColumn;
+    image: Image | string | undefined;
     innerRef: (element: HTMLElement | null) => void;
     draggableProps: DraggableProvidedDraggableProps | null | undefined;
     dragHandleProps: DraggableProvidedDragHandleProps | null | undefined;
@@ -21,6 +22,7 @@ export default function TodoCard({
     todo,
     index,
     id,
+    image,
     innerRef,
     draggableProps,
     dragHandleProps,
@@ -28,18 +30,22 @@ export default function TodoCard({
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const deleteTask = useBoardStore((state) => state.deleteTask);
     useEffect(() => {
-        if (todo.image) {
-            const fetchImage = async () => {
-                const url = await getUrl(todo.image!);
+        const fetchImage = async () => {
+            if (typeof image === 'string') {
+                // If image is a string (URL), set imageUrl directly
+                setImageUrl(image);
+            } else if (image) {
+                // If image is an Image object, fetch the URL
+                const url = await getUrl(image);
                 if (url) {
                     setImageUrl(url.toString());
                 }
-                
-            };
-
-            fetchImage();
-        }
-    }, [todo]);
+            }
+        };
+    
+        fetchImage();
+    }, [image]);
+    
     return (
         <div
             {...dragHandleProps}
